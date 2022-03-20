@@ -33,8 +33,11 @@ def scout():
 
 
 def add_labels():
+
     html_labels = str(label_list.get())
-    print(html_labels)
+    html_labels_list = html_labels.split(', ')
+    print(html_labels_list)
+
 
 scout_button = ttk.Button(root, text="Scout", command=scout)
 scout_button.grid(column=1, row=3, padx=30, pady=10)
