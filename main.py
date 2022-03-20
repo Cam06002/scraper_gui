@@ -18,9 +18,9 @@ url_box = ttk.Entry(root, width=50)
 url_box.grid(column=1, row=2, padx=15, pady=5)
 
     # listing all labels to search
-ttk.Label(text="List HTML labels to search, separated by a comma:").grid(column=1, row=4, padx=15, pady=10)
+ttk.Label(text="List HTML labels to search, separated by a comma:").grid(column=1, row=3, padx=15, pady=10)
 label_list = ttk.Entry(root, width=50)
-label_list.grid(column=1, row=5, padx=15, pady=5)
+label_list.grid(column=1, row=4, padx=15, pady=5)
 
 
 def scout():
@@ -28,21 +28,18 @@ def scout():
     # Main URL sourcing
     url_text = url_box.get()
     data = r.get(url_text)
-    soup = data.text
-    return soup
-
-
-def add_labels():
+    soup = bs(data.content, "html.parser")
 
     html_labels = str(label_list.get())
     html_labels_list = html_labels.split(', ')
-    print(html_labels_list)
+
+    for label in html_labels_list:
+        item_finder = soup.find_all("div", class_=label)
+        for content in item_finder:
+            print(content, end="\n"*2)
 
 
 scout_button = ttk.Button(root, text="Scout", command=scout)
-scout_button.grid(column=1, row=3, padx=30, pady=10)
-
-add_labels_button = ttk.Button(root, text="Add Labels", command=add_labels)
-add_labels_button.grid(column=1, row=6, padx=30, pady=10)
+scout_button.grid(column=1, row=5, padx=30, pady=10)
 
 root.mainloop()
