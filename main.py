@@ -48,6 +48,6 @@ def scout():
 
 
 scout_button = ttk.Button(root, text="Scout", command=scout)
-scout_button.grid(column=1, row=5, padx=30, pady=10)
+scout_button.grid(column=1, row=9, padx=30, pady=10)
 
 root.mainloop()
